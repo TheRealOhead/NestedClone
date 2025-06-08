@@ -1,0 +1,32 @@
+body {
+    color: white;
+    background-color: black;
+}
+
+* {
+    font-family: monospace;
+}
+
+.clickable {
+    user-select: none;
+}
+
+.thing-icon {
+    width:  3vh;
+    height: 3vh;
+    image-rendering: pixelated;
+}
+
+.thing-label {
+    font-size: 2vh;
+    position: relative;
+    bottom: .75vh;
+}
+
+.child-container {
+    margin-left: 1vw;
+}
+
+.main-container {
+    background-color: rgba(255, 255, 255, 1%); /* Gradually get lighter as there are more things nested */
+}
