@@ -26,6 +26,8 @@ export function applyInheritances() : void {
     });
 }
 
+
+
 /**
  * An instance of a thing. Contains fields and methods relating to HTML functionality
  */
@@ -46,7 +48,11 @@ export class ThingInstance {
     public static clickableToManager : Map<HTMLElement, ThingInstance> = new Map<HTMLElement, ThingInstance>();
 
     constructor(thingID : ThingID) {
-        this.thingEntry = ThingInstance.thingDirectory[thingID] as ThingEntry;
+        if (typeof ThingInstance.thingDirectory[thingID] === 'undefined') {
+            console.error(`No item found called ${thingID}, defaulting to perfectly generic object`);
+            thingID = 'perfectly generic object';
+        }
+        this.thingEntry = ThingInstance.thingDirectory[thingID];
 
         this.mainContainer.appendChild(this.clickable);
         this.clickable.appendChild(this.icon);
@@ -73,6 +79,7 @@ export class ThingInstance {
 
         this.clickable.addEventListener('click', ThingInstance.toggle);
         this.clickable.tabIndex = 0;
+        this.clickable.title = `Thing ID: ${thingID}`;
     }
 
     /**

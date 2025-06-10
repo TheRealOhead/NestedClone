@@ -1,4 +1,7 @@
 {
+  "perfectly generic object": {},
+
+
   "string": {
     "children": {
       "universe": {}
@@ -59,24 +62,7 @@
 
 
 
-  "water": {
-    "children": {
-      "hydrogen": {},
-      "oxygen": {}
-    }
-  },
-  "rock": {
-    "children": {
-      "silicon": {},
-      "oxygen": {}
-    }
-  },
-  "salt": {
-    "children": {
-      "chlorine": {},
-      "sodium": {}
-    }
-  },
+
 
 
 

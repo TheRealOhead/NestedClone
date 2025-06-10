@@ -14,12 +14,45 @@
     "label": ["ocean"],
     "children": {
       "water": {},
-      "salt": {}
+      "salt": {},
+      "ocean life": {}
     }
+  },
+
+  "ocean life": {
+    "label": ["life"],
+    "children": {
+      "bacteria": {
+        "range": [5, 10]
+      }
+    },
+    "imagePath": "nothing.png"
   },
 
   "continent": {
     "label": ["continent"],
     "imagePath": "nothing.png"
+  },
+
+
+
+
+  "water": {
+    "children": {
+      "hydrogen": {},
+      "oxygen": {}
+    }
+  },
+  "rock": {
+    "children": {
+      "silicon": {},
+      "oxygen": {}
+    }
+  },
+  "salt": {
+    "children": {
+      "chlorine": {},
+      "sodium": {}
+    }
   }
 }

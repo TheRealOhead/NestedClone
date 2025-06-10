@@ -2,11 +2,94 @@
   "_cell": {
     "children": {
       "cytoplasm": {},
-      "membrane": {}
+      "cell membrane": {}
     }
   },
 
-  "bacteria": {
 
+
+  "bacteria": {
+    "children": {
+      "flagellum": {
+        "chance": 0.5,
+        "range": [1, 2]
+      },
+      "dna": {}
+    },
+    "inheritsFrom": ["_cell"]
+  },
+
+  "nucleotide": {
+    "label": ["A", "C", "G", "T"],
+    "children": {
+      "nitrogen": {},
+      "hydrogen": {},
+      "oxygen": {},
+      "carbon": {}
+    }
+  },
+
+  "dna": {
+    "children": {
+      "nucleotide": {
+        "range": [30, 60]
+      }
+    },
+    "label": ["DNA"]
+  },
+
+
+  "protein": {
+    "children": {
+      "carbon": {},
+      "oxygen": {},
+      "hydrogen": {},
+      "nitrogen": {}
+    }
+  },
+
+  "flagellum": {
+    "children": {
+      "protein": {}
+    }
+  },
+
+  "cytoplasm": {
+    "children": {
+      "water": {},
+      "salt": {}
+    }
+  },
+
+  "cell membrane": {
+    "children": {
+      "protein": {
+        "range": [2, 5]
+      },
+      "phospholipid": {
+        "range": [10, 20]
+      }
+    }
+  },
+  "phospholipid": {
+    "children": {
+      "phospholipid head": {},
+      "phospholipid tail": {
+        "range": [2, 2]
+      }
+    }
+  },
+  "phospholipid head": {
+    "label": ["head"],
+    "children": {
+      "phosphorus": {},
+      "oxygen": {},
+      "carbon": {},
+      "hydrogen": {}
+    }
+  },
+  "phospholipid tail": {
+    "label": ["tail"],
+    "inheritsFrom": ["phospholipid head"]
   }
 }

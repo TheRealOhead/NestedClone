@@ -35,6 +35,10 @@
       this.children = document.createElement("div");
       this.expanded = false;
       this.hasGeneratedChildren = false;
+      if (typeof _ThingInstance.thingDirectory[thingID] === "undefined") {
+        console.error(`No item found called ${thingID}, defaulting to perfectly generic object`);
+        thingID = "perfectly generic object";
+      }
       this.thingEntry = _ThingInstance.thingDirectory[thingID];
       this.mainContainer.appendChild(this.clickable);
       this.clickable.appendChild(this.icon);
@@ -56,6 +60,7 @@
       _ThingInstance.clickableToManager.set(this.clickable, this);
       this.clickable.addEventListener("click", _ThingInstance.toggle);
       this.clickable.tabIndex = 0;
+      this.clickable.title = `Thing ID: ${thingID}`;
     }
     static {
       this.thingDirectory = {};
@@ -119,7 +124,7 @@
     ["magnesium", 24],
     ["", 0],
     ["silicon", 28],
-    ["", 0],
+    ["phosphorus", 31],
     ["", 0],
     ["", 0],
     ["", 0],
@@ -265,8 +270,8 @@
   var waitForLoad = setInterval(() => {
     if (waitingOn == 0) {
       createAtoms(ThingInstance.thingDirectory);
-      console.log(ThingInstance.thingDirectory);
       applyInheritances();
+      console.log(ThingInstance.thingDirectory);
       thingContainer.appendChild(new ThingInstance("universe").mainContainer);
       clearInterval(waitForLoad);
     }
