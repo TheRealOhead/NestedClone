@@ -4,10 +4,10 @@
   "description": "",
   "main": "webroot/scripts/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "esbuild src/index.ts --bundle --outfile=webroot/scripts/index.js --format=iife"
   },
-  "dependencies": {},
   "devDependencies": {
+    "esbuild": "^0.25.5",
     "typescript": "^5.5.3"
   },
   "private": true

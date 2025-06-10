@@ -1,0 +1,64 @@
+{
+  "$id": "thing-schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Things",
+  "description": "A listing of all the things in Nested Clone.",
+  "type": "object",
+  "patternProperties": {
+    "^.*$": {
+      "type": "object",
+      "description": "An entry for a thing, keyed by its ID.",
+      "additionalProperties": false,
+      "properties": {
+        "children": {
+          "type": "object",
+          "description": "A catalog of the potential children of this entry.",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^.*$": {
+              "properties": {
+                "range": {
+                  "type": "array",
+                  "description": "A range describing how many of this child should be generated. Inclusive.",
+                  "minLength": 2,
+                  "maxLength": 2,
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "chance": {
+                  "type": "number",
+                  "description": "The chance for this child to be generated at all",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          }
+        },
+        "label": {
+          "type": "array",
+          "description": "A list of labels to choose from randomly. If unspecified, the ID is used instead.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "imagePath": {
+          "type": "string",
+          "description": "A path to an icon to use, starting at webroot/images. If unspecified, uses webroot/images/${id}.png"
+        },
+        "inheritsFrom": {
+          "type": "array",
+          "description": "A list of IDs of other things that this thing should inherit its children from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "shuffleChildren": {
+          "type": "boolean",
+          "description": "If true, shuffles children"
+        }
+      }
+    }
+  }
+}

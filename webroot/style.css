@@ -12,15 +12,15 @@ body {
 }
 
 .thing-icon {
-    width:  3vh;
-    height: 3vh;
+    width:  4vh;
+    height: 4vh;
     image-rendering: pixelated;
 }
 
 .thing-label {
-    font-size: 2vh;
+    font-size: 3vh;
     position: relative;
-    bottom: .75vh;
+    bottom: 1vh;
 }
 
 .child-container {

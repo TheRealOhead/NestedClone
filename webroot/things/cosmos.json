@@ -1,0 +1,265 @@
+{
+  "string": {
+    "children": {
+      "universe": {}
+    }
+  },
+
+  "_elementaryParticle": {
+    "children": {
+      "string": {}
+    }
+  },
+
+  "up quark": {
+    "inheritsFrom": ["_elementaryParticle"],
+    "imagePath": "quark.png"
+  },
+  "down quark": {
+    "inheritsFrom": ["_elementaryParticle"],
+    "imagePath": "quark.png"
+  },
+  "misc quark": {
+    "inheritsFrom": ["_elementaryParticle"],
+    "label": ["up quark", "down quark", "charm quark", "strange quark", "top quark", "bottom quark"],
+    "imagePath": "quark.png"
+  },
+
+  "proton": {
+    "children": {
+      "down quark": {},
+      "up quark": {
+        "range": [2, 2]
+      },
+      "misc quark": {
+        "range": [10, 15]
+      }
+    },
+    "imagePath": "baryon.png"
+  },
+  "neutron": {
+    "children": {
+      "up quark": {},
+      "down quark": {
+        "range": [2, 2]
+      },
+      "misc quark": {
+        "range": [10, 15]
+      }
+    },
+    "imagePath": "baryon.png"
+  },
+  "electron": {
+    "inheritsFrom": ["_elementaryParticle"]
+  },
+
+
+
+
+
+
+
+  "water": {
+    "children": {
+      "hydrogen": {},
+      "oxygen": {}
+    }
+  },
+  "rock": {
+    "children": {
+      "silicon": {},
+      "oxygen": {}
+    }
+  },
+  "salt": {
+    "children": {
+      "chlorine": {},
+      "sodium": {}
+    }
+  },
+
+
+
+
+
+
+
+
+
+
+
+  "_largerThanStarSystem": {
+    "children": {
+      "dark matter": {},
+      "ufo": {
+        "chance": 0.01
+      }
+    }
+  },
+
+  "ufo": {
+    "label": ["UFO"]
+  },
+
+  "dark matter": {
+    "children": {
+      "dark matter": {
+        "range": [2, 2]
+      }
+    }
+  },
+
+  "universe": {
+    "children": {
+      "galaxy filament": {
+        "range": [10, 20]
+      }
+    },
+    "inheritsFrom": [
+      "_largerThanStarSystem"
+    ]
+  },
+
+  "galaxy filament": {
+    "children": {
+      "supercluster": {
+        "range": [10, 20]
+      }
+    },
+    "inheritsFrom": [
+      "_largerThanStarSystem"
+    ]
+  },
+
+  "supercluster": {
+    "children": {
+      "galaxy": {
+        "range": [20, 40]
+      }
+    },
+    "inheritsFrom": [
+      "_largerThanStarSystem"
+    ]
+  },
+
+  "galaxy": {
+    "children": {
+      "star system": {
+        "range": [10, 20]
+      }
+    },
+    "inheritsFrom": [
+      "_largerThanStarSystem"
+    ]
+  },
+
+  "star system": {
+    "shuffleChildren": true,
+    "children": {
+      "star": {},
+      "lifeless planet": {
+        "range": [2, 4],
+        "chance": 0.95
+      },
+      "earthlike planet": {
+        "range": [1, 3],
+        "chance": 0.85
+      },
+      "postapocalyptic planet": {
+        "range": [1, 2],
+        "chance": 0.2
+      },
+      "gas giant": {
+        "range": [1, 5],
+        "chance": 0.9
+      }
+    }
+  },
+
+  "star": {
+    "children": {
+      "hydrogen": {},
+      "helium": {}
+    }
+  },
+
+  "gas giant": {
+    "children": {
+      "moon": {
+        "range": [2, 10]
+      }
+    },
+    "inheritsFrom": ["star"]
+  },
+
+  "lifeless planet": {
+    "children": {
+      "crust": {},
+      "mantle": {},
+      "core": {},
+      "moon": {
+        "chance": 0.75,
+        "range": [1, 3]
+      }
+    }
+  },
+
+  "earthlike planet": {
+    "children": {
+      "earthlike surface": {}
+    },
+    "inheritsFrom": ["lifeless planet"]
+  },
+
+  "postapocalyptic planet": {
+    "children": {
+      "postapocalyptic surface": {}
+    },
+    "inheritsFrom": ["lifeless planet"]
+  },
+
+  "moon": {
+    "children": {
+      "mantle": {},
+      "crust": {},
+      "core": {}
+    }
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "crust": {
+    "children": {
+      "silicon": {},
+      "oxygen": {}
+    }
+  },
+  "mantle": {
+    "children": {
+      "silicon": {},
+      "oxygen": {},
+      "iron": {},
+      "magnesium": {}
+    }
+  },
+  "core": {
+    "children": {
+      "iron": {},
+      "nickel": {}
+    }
+  }
+}

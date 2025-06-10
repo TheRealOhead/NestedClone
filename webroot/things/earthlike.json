@@ -1,0 +1,25 @@
+{
+  "earthlike surface": {
+    "label": ["surface"],
+    "imagePath": "nothing.png",
+    "children": {
+      "ocean": {},
+      "continent": {
+        "range": [1, 10]
+      }
+    }
+  },
+
+  "ocean": {
+    "label": ["ocean"],
+    "children": {
+      "water": {},
+      "salt": {}
+    }
+  },
+
+  "continent": {
+    "label": ["continent"],
+    "imagePath": "nothing.png"
+  }
+}
