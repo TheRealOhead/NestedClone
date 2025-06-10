@@ -45,7 +45,7 @@
         },
         "imagePath": {
           "type": "string",
-          "description": "A path to an icon to use, starting at webroot/images. If unspecified, uses webroot/images/${id}.png"
+          "description": "A path to an icon to use, starting at docs/images. If unspecified, uses webroot/images/${id}.png"
         },
         "inheritsFrom": {
           "type": "array",

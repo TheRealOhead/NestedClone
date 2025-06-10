@@ -18,7 +18,6 @@ fetch('things.json')
     });
 */
 
-
 let waitingOn : number = 0;
 
 [
