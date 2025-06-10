@@ -91,6 +91,9 @@
     "children": {
       "dark matter": {
         "range": [2, 2]
+      },
+      "perfectly generic object": {
+        "chance": 0.01
       }
     }
   },

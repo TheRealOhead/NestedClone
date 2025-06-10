@@ -3,7 +3,9 @@
     "label": ["surface"],
     "imagePath": "nothing.png",
     "children": {
-      "ocean": {},
+      "ocean": {
+        "range": [1, 6]
+      },
       "continent": {
         "range": [1, 10]
       }
@@ -21,6 +23,7 @@
 
   "ocean life": {
     "label": ["life"],
+    "shuffleChildren": true,
     "children": {
       "bacteria": {
         "range": [5, 10]

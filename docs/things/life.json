@@ -26,7 +26,8 @@
       "hydrogen": {},
       "oxygen": {},
       "carbon": {}
-    }
+    },
+    "imagePath": "nothing.png"
   },
 
   "dna": {
@@ -86,10 +87,12 @@
       "oxygen": {},
       "carbon": {},
       "hydrogen": {}
-    }
+    },
+    "imagePath": "nothing.png"
   },
   "phospholipid tail": {
     "label": ["tail"],
-    "inheritsFrom": ["phospholipid head"]
+    "inheritsFrom": ["phospholipid head"],
+    "imagePath": "nothing.png"
   }
 }
