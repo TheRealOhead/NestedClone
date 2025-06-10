@@ -2,9 +2,9 @@
   "name": "NestedClone",
   "version": "1.0.0",
   "description": "",
-  "main": "webroot/scripts/index.js",
+  "main": "docs/scripts/index.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --outfile=webroot/scripts/index.js --format=iife"
+    "build": "esbuild src/index.ts --bundle --outfile=docs/scripts/index.js --format=iife"
   },
   "devDependencies": {
     "esbuild": "^0.25.5",
