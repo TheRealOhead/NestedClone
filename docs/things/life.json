@@ -2,11 +2,247 @@
   "_cell": {
     "children": {
       "cytoplasm": {},
-      "membrane": {}
+      "cell membrane": {}
     }
   },
 
-  "bacteria": {
 
+
+  "bacteria": {
+    "children": {
+      "flagellum": {
+        "chance": 0.5,
+        "range": [1, 2]
+      },
+      "dna": {}
+    },
+    "inheritsFrom": ["_cell"]
+  },
+
+  "evil": {
+    "label": ["1% evil"],
+    "imagePath": "nothing.png"
+  },
+
+  "hot gas": {
+    "label": ["99% hot gas"],
+    "imagePath": "nothing.png"
+  },
+
+  "plankter": {
+    "children": {
+      "evil": {},
+      "hot gas": {}
+    },
+    "inheritsFrom": ["bacteria"],
+    "imagePath": "bacteria.png",
+    "description": "The singular form of \"plankton\""
+  },
+
+  "nucleotide": {
+    "label": ["A", "C", "G", "T"],
+    "children": {
+      "nitrogen": {},
+      "hydrogen": {},
+      "oxygen": {},
+      "carbon": {}
+    },
+    "imagePath": "nothing.png"
+  },
+
+  "dna": {
+    "children": {
+      "nucleotide": {
+        "range": [30, 60]
+      }
+    },
+    "label": ["DNA"]
+  },
+
+
+  "protein": {
+    "children": {
+      "carbon": {},
+      "oxygen": {},
+      "hydrogen": {},
+      "nitrogen": {}
+    }
+  },
+
+  "flagellum": {
+    "children": {
+      "protein": {}
+    }
+  },
+
+  "cytoplasm": {
+    "children": {
+      "water": {},
+      "salt": {}
+    }
+  },
+
+  "cell membrane": {
+    "children": {
+      "protein": {
+        "range": [2, 5]
+      },
+      "phospholipid": {
+        "range": [10, 20]
+      }
+    },
+    "label": ["membrane"]
+  },
+  "phospholipid": {
+    "children": {
+      "phospholipid head": {},
+      "phospholipid tail": {
+        "range": [2, 2]
+      }
+    }
+  },
+  "phospholipid head": {
+    "label": ["head"],
+    "children": {
+      "phosphorus": {},
+      "oxygen": {},
+      "carbon": {},
+      "hydrogen": {}
+    },
+    "imagePath": "nothing.png"
+  },
+  "phospholipid tail": {
+    "label": ["tail"],
+    "inheritsFrom": ["phospholipid head"],
+    "imagePath": "nothing.png"
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "mitochondrea": {
+    "children": {
+      "cell membrane": {
+        "range": [2, 2]
+      },
+      "dna": {}
+    },
+    "description": "The powerhouse of the cell!"
+  },
+
+  "nucleus": {
+    "children": {
+      "dna": {},
+      "cell membrane": {}
+    }
+  },
+
+  "eukaryotic cell": {
+    "children": {
+      "nucleus": {},
+      "mitochondrea": {
+        "range": [5, 10]
+      }
+    },
+    "inheritsFrom": ["_cell"],
+    "label": ["cell"]
+  },
+
+  "cone cell": {
+    "inheritsFrom": ["eukaryotic cell"],
+    "label": ["cone"]
+  },
+
+  "rod cell": {
+    "inheritsFrom": ["eukaryotic cell"],
+    "label": ["rod"]
+  },
+
+  "aqueous humor": {
+    "inheritsFrom": ["cytoplasm"],
+    "imagePath": "cytoplasm.png"
+  },
+
+  "retina": {
+    "shuffleChildren": true,
+    "children": {
+      "cone cell": {
+        "range": [8, 10]
+      },
+      "rod cell": {
+        "range": [8, 10]
+      },
+      "aqueous humor": {}
+    }
+  },
+
+  "bone": {
+    "children": {
+      "calcium": {},
+      "eukaryotic cell": {
+        "range": [5, 10]
+      }
+    },
+    "description": "Not to alarm you, but there's a skeleton inside you RIGHT NOW"
+  },
+
+  "scale": {
+    "inheritsFrom": ["bone"]
+  },
+
+  "eye": {
+    "children": {
+      "retina": {},
+      "lens": {}
+    }
+  },
+
+
+
+  "tooth": {
+
+
+  },
+
+
+  "mouth": {
+    "children": {
+      "tooth": {
+        "range": [4, 8]
+      },
+      "tongue": {}
+    }
+  },
+
+  "fish": {
+    "children": {
+      "bone": {
+        "range": [5, 8]
+      },
+      "scale": {
+        "range": [5, 8]
+      },
+      "eye": {
+        "range": [2, 2]
+      },
+      "mouth": {}
+    },
+    "description": "blub, blub"
   }
 }

@@ -1,4 +1,9 @@
 {
+  "thing": {
+    "description": "It doesn't get any more generic than this!"
+  },
+
+
   "string": {
     "children": {
       "universe": {}
@@ -59,24 +64,7 @@
 
 
 
-  "water": {
-    "children": {
-      "hydrogen": {},
-      "oxygen": {}
-    }
-  },
-  "rock": {
-    "children": {
-      "silicon": {},
-      "oxygen": {}
-    }
-  },
-  "salt": {
-    "children": {
-      "chlorine": {},
-      "sodium": {}
-    }
-  },
+
 
 
 
@@ -105,6 +93,9 @@
     "children": {
       "dark matter": {
         "range": [2, 2]
+      },
+      "thing": {
+        "chance": 0.01
       }
     }
   },

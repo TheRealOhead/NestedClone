@@ -33,17 +33,29 @@
       this.icon = document.createElement("img");
       this.label = document.createElement("span");
       this.children = document.createElement("div");
+      this.description = document.createElement("span");
       this.expanded = false;
       this.hasGeneratedChildren = false;
+      const originalThingID = thingID;
+      if (typeof _ThingInstance.thingDirectory[thingID] === "undefined") {
+        console.warn(`No item found called ${thingID}, defaulting to the thing`);
+        thingID = "thing";
+      }
       this.thingEntry = _ThingInstance.thingDirectory[thingID];
       this.mainContainer.appendChild(this.clickable);
       this.clickable.appendChild(this.icon);
       this.clickable.appendChild(this.label);
+      this.clickable.appendChild(this.description);
       this.mainContainer.appendChild(this.children);
       this.mainContainer.classList.add("main-container");
       this.children.classList.add("child-container");
       this.clickable.classList.add("clickable");
       this.icon.classList.add("thing-icon");
+      this.description.classList.add("description");
+      this.description.innerHTML = this.thingEntry.description || "";
+      if (this.thingEntry === _ThingInstance.thingDirectory["thing"] && originalThingID != thingID) {
+        this.description.innerHTML = `This thing was supposed to be "${originalThingID}", but Owen messed up!`;
+      }
       this.label.innerHTML = chooseFromArray(this.thingEntry.label || [thingID]);
       this.label.classList.add("thing-label");
       this.icon.src = this.thingEntry.imagePath ? `images/${this.thingEntry.imagePath}` : `images/${thingID}.png`;
@@ -56,6 +68,7 @@
       _ThingInstance.clickableToManager.set(this.clickable, this);
       this.clickable.addEventListener("click", _ThingInstance.toggle);
       this.clickable.tabIndex = 0;
+      this.clickable.title = `Thing ID: ${thingID}`;
     }
     static {
       this.thingDirectory = {};
@@ -119,12 +132,12 @@
     ["magnesium", 24],
     ["", 0],
     ["silicon", 28],
+    ["phosphorus", 31],
     ["", 0],
     ["", 0],
     ["", 0],
     ["", 0],
-    ["", 0],
-    ["", 0],
+    ["calcium", 40],
     ["", 0],
     ["", 0],
     ["", 0],
@@ -265,9 +278,10 @@
   var waitForLoad = setInterval(() => {
     if (waitingOn == 0) {
       createAtoms(ThingInstance.thingDirectory);
-      console.log(ThingInstance.thingDirectory);
       applyInheritances();
-      thingContainer.appendChild(new ThingInstance("universe").mainContainer);
+      console.log(ThingInstance.thingDirectory);
+      const startThing = new URLSearchParams(window.location.search).get("start") || "universe";
+      thingContainer.appendChild(new ThingInstance(startThing).mainContainer);
       clearInterval(waitForLoad);
     }
   }, 10);

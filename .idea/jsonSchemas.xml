@@ -23,6 +23,15 @@
                   <Item>
                     <option name="path" value="webroot/things/cosmos.json" />
                   </Item>
+                  <Item>
+                    <option name="path" value="docs/things/life.json" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="docs/things/earthlike.json" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="docs/things/cosmos.json" />
+                  </Item>
                 </list>
               </option>
             </SchemaInfo>

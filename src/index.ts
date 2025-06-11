@@ -1,22 +1,8 @@
 import * as Things from "./things";
 import * as Elements from "./elements";
+import {ThingID} from './things';
 
 const thingContainer : HTMLElement = document.getElementById('things') as HTMLElement;
-/*
-fetch('things.json')
-    .then((r : Response) => r.json())
-    .then((t: any) : void => {
-        Things.ThingInstance.thingDirectory = t;
-
-        Elements.createAtoms(Things.ThingInstance.thingDirectory);
-
-        console.log(Things.ThingInstance.thingDirectory);
-
-        Things.applyInheritances();
-
-        thingContainer.appendChild(new Things.ThingInstance('universe').mainContainer)
-    });
-*/
 
 let waitingOn : number = 0;
 
@@ -38,14 +24,16 @@ let waitingOn : number = 0;
 const waitForLoad = setInterval(() : void => {
         if (waitingOn == 0) {
 
-                Elements.createAtoms(Things.ThingInstance.thingDirectory);
+            Elements.createAtoms(Things.ThingInstance.thingDirectory);
 
-                console.log(Things.ThingInstance.thingDirectory);
+            Things.applyInheritances();
 
-                Things.applyInheritances();
+            console.log(Things.ThingInstance.thingDirectory);
 
-                thingContainer.appendChild(new Things.ThingInstance('universe').mainContainer);
+            const startThing : ThingID = new URLSearchParams(window.location.search).get('start') || 'universe';
 
-                clearInterval(waitForLoad);
+            thingContainer.appendChild(new Things.ThingInstance(startThing).mainContainer);
+
+            clearInterval(waitForLoad);
         }
 }, 10);

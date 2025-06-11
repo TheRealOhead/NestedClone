@@ -26,6 +26,8 @@ export function applyInheritances() : void {
     });
 }
 
+
+
 /**
  * An instance of a thing. Contains fields and methods relating to HTML functionality
  */
@@ -37,6 +39,7 @@ export class ThingInstance {
     readonly icon : HTMLImageElement = document.createElement('img');
     readonly label : HTMLElement = document.createElement('span');
     readonly children : HTMLElement = document.createElement('div');
+    readonly description : HTMLElement = document.createElement('span');
 
     readonly thingEntry : ThingEntry;
 
@@ -46,17 +49,31 @@ export class ThingInstance {
     public static clickableToManager : Map<HTMLElement, ThingInstance> = new Map<HTMLElement, ThingInstance>();
 
     constructor(thingID : ThingID) {
-        this.thingEntry = ThingInstance.thingDirectory[thingID] as ThingEntry;
+        const originalThingID : ThingID = thingID;
+
+        if (typeof ThingInstance.thingDirectory[thingID] === 'undefined') {
+            console.warn(`No item found called ${thingID}, defaulting to the thing`);
+            thingID = 'thing';
+        }
+        this.thingEntry = ThingInstance.thingDirectory[thingID];
 
         this.mainContainer.appendChild(this.clickable);
         this.clickable.appendChild(this.icon);
         this.clickable.appendChild(this.label);
+        this.clickable.appendChild(this.description);
         this.mainContainer.appendChild(this.children);
 
         this.mainContainer.classList.add('main-container');
         this.children.classList.add('child-container');
         this.clickable.classList.add('clickable');
         this.icon.classList.add('thing-icon');
+        this.description.classList.add('description');
+
+        this.description.innerHTML = this.thingEntry.description || '';
+
+        if (this.thingEntry === ThingInstance.thingDirectory['thing'] && originalThingID != thingID) {
+            this.description.innerHTML = `This thing was supposed to be "${originalThingID}", but Owen messed up!`
+        }
 
         this.label.innerHTML = chooseFromArray(this.thingEntry.label || [thingID]); // Default to the ThingID if no label set
         this.label.classList.add('thing-label');
@@ -73,6 +90,7 @@ export class ThingInstance {
 
         this.clickable.addEventListener('click', ThingInstance.toggle);
         this.clickable.tabIndex = 0;
+        this.clickable.title = `Thing ID: ${thingID}`;
     }
 
     /**
@@ -152,14 +170,15 @@ export interface ChildDirectory {
 export type ThingEntry = {
     label?: string[],
     children: ChildDirectory,
-    inheritsFrom?: ThingID[]
+    inheritsFrom?: ThingID[],
     /**
      * An image path starting in the images directory
      * Ex: "example.png"
      * Derived from {@link ThingID} if not specified
      */
-    imagePath?: string
-    shuffleChildren?: boolean
+    imagePath?: string,
+    shuffleChildren?: boolean,
+    description?: string
 }
 export interface ThingDirectory {
     [key : ThingID]: ThingEntry

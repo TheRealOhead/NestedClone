@@ -3,7 +3,9 @@
     "label": ["surface"],
     "imagePath": "nothing.png",
     "children": {
-      "ocean": {},
+      "ocean": {
+        "range": [1, 6]
+      },
       "continent": {
         "range": [1, 10]
       }
@@ -14,12 +16,49 @@
     "label": ["ocean"],
     "children": {
       "water": {},
-      "salt": {}
+      "salt": {},
+      "ocean life": {}
     }
+  },
+
+  "ocean life": {
+    "label": ["life"],
+    "shuffleChildren": true,
+    "children": {
+      "plankter": {
+        "range": [5, 10]
+      },
+      "fish": {
+        "range": [5, 15]
+      }
+    },
+    "imagePath": "nothing.png"
   },
 
   "continent": {
     "label": ["continent"],
     "imagePath": "nothing.png"
+  },
+
+
+
+
+  "water": {
+    "children": {
+      "hydrogen": {},
+      "oxygen": {}
+    }
+  },
+  "rock": {
+    "children": {
+      "silicon": {},
+      "oxygen": {}
+    }
+  },
+  "salt": {
+    "children": {
+      "chlorine": {},
+      "sodium": {}
+    }
   }
 }

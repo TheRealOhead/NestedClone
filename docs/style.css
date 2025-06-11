@@ -23,6 +23,15 @@ body {
     bottom: 1vh;
 }
 
+.description {
+    font-size: 1.5vh;
+    position: relative;
+    bottom: 1.5vh;
+    left: 3vw;
+    font-style: italic;
+    color: gray;
+}
+
 .child-container {
     margin-left: 1vw;
 }
