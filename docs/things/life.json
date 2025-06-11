@@ -19,6 +19,26 @@
     "inheritsFrom": ["_cell"]
   },
 
+  "evil": {
+    "label": ["1% evil"],
+    "imagePath": "nothing.png"
+  },
+
+  "hot gas": {
+    "label": ["99% hot gas"],
+    "imagePath": "nothing.png"
+  },
+
+  "plankter": {
+    "children": {
+      "evil": {},
+      "hot gas": {}
+    },
+    "inheritsFrom": ["bacteria"],
+    "imagePath": "bacteria.png",
+    "description": "The singular form of \"plankton\""
+  },
+
   "nucleotide": {
     "label": ["A", "C", "G", "T"],
     "children": {
@@ -118,7 +138,9 @@
 
   "mitochondrea": {
     "children": {
-      "cell membrane": {},
+      "cell membrane": {
+        "range": [2, 2]
+      },
       "dna": {}
     },
     "description": "The powerhouse of the cell!"
@@ -188,6 +210,23 @@
     "children": {
       "retina": {},
       "lens": {}
+    }
+  },
+
+
+
+  "tooth": {
+
+
+  },
+
+
+  "mouth": {
+    "children": {
+      "tooth": {
+        "range": [4, 8]
+      },
+      "tongue": {}
     }
   },
 

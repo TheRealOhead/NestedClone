@@ -25,7 +25,7 @@
     "label": ["life"],
     "shuffleChildren": true,
     "children": {
-      "bacteria": {
+      "plankter": {
         "range": [5, 10]
       },
       "fish": {
