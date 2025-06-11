@@ -70,7 +70,8 @@
       "phospholipid": {
         "range": [10, 20]
       }
-    }
+    },
+    "label": ["membrane"]
   },
   "phospholipid": {
     "children": {
@@ -94,5 +95,115 @@
     "label": ["tail"],
     "inheritsFrom": ["phospholipid head"],
     "imagePath": "nothing.png"
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "mitochondrea": {
+    "children": {
+      "cell membrane": {},
+      "dna": {}
+    },
+    "description": "The powerhouse of the cell!"
+  },
+
+  "nucleus": {
+    "children": {
+      "dna": {},
+      "cell membrane": {}
+    }
+  },
+
+  "eukaryotic cell": {
+    "children": {
+      "nucleus": {},
+      "mitochondrea": {
+        "range": [5, 10]
+      }
+    },
+    "inheritsFrom": ["_cell"],
+    "label": ["cell"]
+  },
+
+  "cone cell": {
+    "inheritsFrom": ["eukaryotic cell"],
+    "label": ["cone"]
+  },
+
+  "rod cell": {
+    "inheritsFrom": ["eukaryotic cell"],
+    "label": ["rod"]
+  },
+
+  "aqueous humor": {
+    "inheritsFrom": ["cytoplasm"],
+    "imagePath": "cytoplasm.png"
+  },
+
+  "retina": {
+    "shuffleChildren": true,
+    "children": {
+      "cone cell": {
+        "range": [8, 10]
+      },
+      "rod cell": {
+        "range": [8, 10]
+      },
+      "aqueous humor": {}
+    }
+  },
+
+  "bone": {
+    "children": {
+      "calcium": {},
+      "eukaryotic cell": {
+        "range": [5, 10]
+      }
+    },
+    "description": "Not to alarm you, but there's a skeleton inside you RIGHT NOW"
+  },
+
+  "scale": {
+    "inheritsFrom": ["bone"]
+  },
+
+  "eye": {
+    "children": {
+      "retina": {},
+      "lens": {}
+    }
+  },
+
+  "fish": {
+    "children": {
+      "bone": {
+        "range": [5, 8]
+      },
+      "scale": {
+        "range": [5, 8]
+      },
+      "eye": {
+        "range": [2, 2]
+      },
+      "mouth": {}
+    },
+    "description": "blub, blub"
   }
 }

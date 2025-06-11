@@ -33,21 +33,29 @@
       this.icon = document.createElement("img");
       this.label = document.createElement("span");
       this.children = document.createElement("div");
+      this.description = document.createElement("span");
       this.expanded = false;
       this.hasGeneratedChildren = false;
+      const originalThingID = thingID;
       if (typeof _ThingInstance.thingDirectory[thingID] === "undefined") {
-        console.error(`No item found called ${thingID}, defaulting to perfectly generic object`);
-        thingID = "perfectly generic object";
+        console.warn(`No item found called ${thingID}, defaulting to the thing`);
+        thingID = "thing";
       }
       this.thingEntry = _ThingInstance.thingDirectory[thingID];
       this.mainContainer.appendChild(this.clickable);
       this.clickable.appendChild(this.icon);
       this.clickable.appendChild(this.label);
+      this.clickable.appendChild(this.description);
       this.mainContainer.appendChild(this.children);
       this.mainContainer.classList.add("main-container");
       this.children.classList.add("child-container");
       this.clickable.classList.add("clickable");
       this.icon.classList.add("thing-icon");
+      this.description.classList.add("description");
+      this.description.innerHTML = this.thingEntry.description || "";
+      if (this.thingEntry === _ThingInstance.thingDirectory["thing"] && originalThingID != thingID) {
+        this.description.innerHTML = `This thing was supposed to be "${originalThingID}", but Owen messed up!`;
+      }
       this.label.innerHTML = chooseFromArray(this.thingEntry.label || [thingID]);
       this.label.classList.add("thing-label");
       this.icon.src = this.thingEntry.imagePath ? `images/${this.thingEntry.imagePath}` : `images/${thingID}.png`;
@@ -129,7 +137,7 @@
     ["", 0],
     ["", 0],
     ["", 0],
-    ["", 0],
+    ["calcium", 40],
     ["", 0],
     ["", 0],
     ["", 0],
@@ -272,7 +280,8 @@
       createAtoms(ThingInstance.thingDirectory);
       applyInheritances();
       console.log(ThingInstance.thingDirectory);
-      thingContainer.appendChild(new ThingInstance("universe").mainContainer);
+      const startThing = new URLSearchParams(window.location.search).get("start") || "universe";
+      thingContainer.appendChild(new ThingInstance(startThing).mainContainer);
       clearInterval(waitForLoad);
     }
   }, 10);

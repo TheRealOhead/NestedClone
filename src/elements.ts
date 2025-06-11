@@ -17,7 +17,7 @@ import * as Things from "./things"; type ElementData = [Things.ThingID, number];
     ['', 0],
     ['', 0],
     ['', 0],
-    ['', 0],
+    ['calcium', 40],
     ['', 0],
     ['', 0],
     ['', 0],

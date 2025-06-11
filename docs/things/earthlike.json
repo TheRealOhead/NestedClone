@@ -27,6 +27,9 @@
     "children": {
       "bacteria": {
         "range": [5, 10]
+      },
+      "fish": {
+        "range": [5, 15]
       }
     },
     "imagePath": "nothing.png"

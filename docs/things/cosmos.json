@@ -1,5 +1,7 @@
 {
-  "perfectly generic object": {},
+  "thing": {
+    "description": "It doesn't get any more generic than this!"
+  },
 
 
   "string": {
@@ -92,7 +94,7 @@
       "dark matter": {
         "range": [2, 2]
       },
-      "perfectly generic object": {
+      "thing": {
         "chance": 0.01
       }
     }

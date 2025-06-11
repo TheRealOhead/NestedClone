@@ -1,5 +1,6 @@
 import * as Things from "./things";
 import * as Elements from "./elements";
+import {ThingID} from './things';
 
 const thingContainer : HTMLElement = document.getElementById('things') as HTMLElement;
 
@@ -29,7 +30,9 @@ const waitForLoad = setInterval(() : void => {
 
             console.log(Things.ThingInstance.thingDirectory);
 
-            thingContainer.appendChild(new Things.ThingInstance('universe').mainContainer);
+            const startThing : ThingID = new URLSearchParams(window.location.search).get('start') || 'universe';
+
+            thingContainer.appendChild(new Things.ThingInstance(startThing).mainContainer);
 
             clearInterval(waitForLoad);
         }
