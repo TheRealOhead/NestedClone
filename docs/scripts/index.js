@@ -264,6 +264,7 @@
   var thingContainer = document.getElementById("things");
   var waitingOn = 0;
   [
+    "things/compounds.json",
     "things/cosmos.json",
     "things/earthlike.json",
     "things/life.json"

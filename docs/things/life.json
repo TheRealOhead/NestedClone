@@ -6,6 +6,13 @@
     }
   },
 
+  "saline": {
+    "children": {
+      "water": {},
+      "salt": {}
+    }
+  },
+
 
 
   "bacteria": {
@@ -76,10 +83,8 @@
   },
 
   "cytoplasm": {
-    "children": {
-      "water": {},
-      "salt": {}
-    }
+    "inheritsFrom": ["saline"],
+    "imagePath": "saline.png"
   },
 
   "cell membrane": {
@@ -153,7 +158,7 @@
     }
   },
 
-  "eukaryotic cell": {
+  "eu cell": {
     "children": {
       "nucleus": {},
       "mitochondrea": {
@@ -165,18 +170,18 @@
   },
 
   "cone cell": {
-    "inheritsFrom": ["eukaryotic cell"],
+    "inheritsFrom": ["eu cell"],
     "label": ["cone"]
   },
 
   "rod cell": {
-    "inheritsFrom": ["eukaryotic cell"],
+    "inheritsFrom": ["eu cell"],
     "label": ["rod"]
   },
 
   "aqueous humor": {
-    "inheritsFrom": ["cytoplasm"],
-    "imagePath": "cytoplasm.png"
+    "inheritsFrom": ["saline"],
+    "imagePath": "saline.png"
   },
 
   "retina": {
@@ -187,15 +192,14 @@
       },
       "rod cell": {
         "range": [8, 10]
-      },
-      "aqueous humor": {}
+      }
     }
   },
 
   "bone": {
     "children": {
       "calcium": {},
-      "eukaryotic cell": {
+      "eu cell": {
         "range": [5, 10]
       }
     },
@@ -206,36 +210,139 @@
     "inheritsFrom": ["bone"]
   },
 
+  "lens": {
+    "children": {
+      "eu cell": {
+        "range": [10, 20]
+      }
+    }
+  },
+
   "eye": {
     "children": {
       "retina": {},
-      "lens": {}
+      "lens": {},
+      "aqueous humor": {}
     }
   },
 
 
 
   "tooth": {
+    "inheritsFrom": ["bone"]
+  },
 
 
+
+
+  "muscle": {
+    "shuffleChildren": true,
+    "children": {
+      "eu cell": {
+        "range": [10, 20]
+      },
+      "protein": {
+        "range": [10, 20]
+      },
+      "blood vessel": {
+        "range": [5, 10]
+      }
+    }
+  },
+
+
+  "tongue": {
+    "children": {
+      "muscle": {}
+    }
   },
 
 
   "mouth": {
     "children": {
       "tooth": {
-        "range": [4, 8]
+        "range": [8, 12]
       },
       "tongue": {}
     }
   },
 
-  "fish": {
+  "blood plasma": {
+    "inheritsFrom": ["saline"],
+    "imagePath": "saline.png"
+  },
+
+  "white blood cell": {
+    "inheritsFrom": ["eu cell"],
+    "imagePath": "eu cell.png"
+  },
+
+  "hemoglobin": {
+    "children": {
+      "iron": {},
+      "nitrogen": {},
+      "oxygen": {},
+      "hydrogen": {}
+    }
+  },
+
+  "red blood cell": {
+    "children": {
+      "hemoglobin": {
+        "range": [5, 10]
+      }
+    },
+    "inheritsFrom": ["eu cell"]
+  },
+
+  "blood": {
+    "children": {
+      "red blood cell": {
+        "range": [10, 20]
+      },
+      "white blood cell": {
+        "range": [5, 10]
+      },
+      "blood plasma": {}
+    }
+  },
+
+  "love": {},
+
+  "heart": {
+    "children": {
+      "love": {},
+      "muscle": {
+        "range": [3, 5]
+      },
+      "blood": {}
+    }
+  },
+
+  "blood vessel": {
+    "children": {
+      "eu cell": {
+        "range": [5, 10]
+      },
+      "blood": {}
+    }
+  },
+
+  "_animal": {
+    "children": {
+      "blood vessel": {
+        "range": [5, 10]
+      },
+      "heart": {},
+      "muscle": {
+        "range": [5, 10]
+      }
+    }
+  },
+
+  "_vertebrate": {
     "children": {
       "bone": {
-        "range": [5, 8]
-      },
-      "scale": {
         "range": [5, 8]
       },
       "eye": {
@@ -243,6 +350,91 @@
       },
       "mouth": {}
     },
-    "description": "blub, blub"
+    "inheritsFrom": ["_animal"]
+  },
+
+  "_fish": {
+    "children": {
+      "scale": {
+        "range": [5, 8]
+      }
+    },
+    "inheritsFrom": ["_vertebrate"]
+  },
+
+  "freshwater fish": {
+    "inheritsFrom": ["_fish"],
+    "description": "blub, blub",
+    "label": ["salmon", "sturgeon", "carp", "walleye", "perch", "trout", "catfish"]
+  },
+
+  "saltwater fish": {
+    "inheritsFrom": ["_fish"],
+    "description": "blub, blub",
+    "label": ["salmon", "sunfish", "sea bass", "mackerel", "tuna", "swordfish", "skate"],
+    "imagePath": "fish.png"
+  },
+
+  "_invertebrate": {
+    "inheritsFrom": ["_animal"]
+  },
+
+  "shell": {
+    "children": {
+      "calcium carbonate": {}
+    }
+  },
+
+  "_shelledInvertebrate": {
+    "inheritsFrom": ["_invertebrate"],
+    "children": {
+      "shell": {
+        "chance": 0.97
+      }
+    }
+  },
+
+  "eyeless mollusk": {
+    "inheritsFrom": ["_shelledInvertebrate"],
+    "label": ["clam", "snail", "oyster", "barnacle"]
+  },
+
+  "eyed mollusk": {
+    "inheritsFrom": ["eyeless mollusk"],
+    "children": {
+      "eye": {
+        "range": [2, 2]
+      }
+    },
+    "label": ["snail", "nautilus"]
+  },
+
+  "exoskeleton": {
+    "inheritsFrom": ["shell"]
+  },
+
+  "claw": {
+    "children": {
+      "blood vessel": {
+        "range": [5, 10]
+      },
+      "muscle": {
+        "range": [5, 10]
+      }
+    }
+  },
+
+  "crustacean": {
+    "children": {
+      "exoskeleton": {},
+      "claw": {
+        "range": [2, 2]
+      },
+      "eye": {
+        "range": [2, 2]
+      }
+    },
+    "label": ["crab", "lobster", "shrimp"],
+    "inheritsFrom": ["_invertebrate"]
   }
 }

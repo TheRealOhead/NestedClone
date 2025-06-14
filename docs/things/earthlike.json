@@ -28,8 +28,17 @@
       "plankter": {
         "range": [5, 10]
       },
-      "fish": {
+      "saltwater fish": {
         "range": [5, 15]
+      },
+      "eyeless mollusk": {
+        "range": [5, 15]
+      },
+      "eyed mollusk": {
+        "range": [5, 10]
+      },
+      "crustacean": {
+        "range": [5, 10]
       }
     },
     "imagePath": "nothing.png"
@@ -38,27 +47,5 @@
   "continent": {
     "label": ["continent"],
     "imagePath": "nothing.png"
-  },
-
-
-
-
-  "water": {
-    "children": {
-      "hydrogen": {},
-      "oxygen": {}
-    }
-  },
-  "rock": {
-    "children": {
-      "silicon": {},
-      "oxygen": {}
-    }
-  },
-  "salt": {
-    "children": {
-      "chlorine": {},
-      "sodium": {}
-    }
   }
 }
