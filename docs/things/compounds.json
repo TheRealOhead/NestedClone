@@ -1,0 +1,29 @@
+{
+  "calcium carbonate": {
+    "children": {
+      "calcium": {},
+      "carbon": {},
+      "oxygen": {}
+    },
+    "imagePath": "molecule.png"
+  },
+
+  "water": {
+    "children": {
+      "hydrogen": {},
+      "oxygen": {}
+    }
+  },
+  "rock": {
+    "children": {
+      "silicon": {},
+      "oxygen": {}
+    }
+  },
+  "salt": {
+    "children": {
+      "chlorine": {},
+      "sodium": {}
+    }
+  }
+}

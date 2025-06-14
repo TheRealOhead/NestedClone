@@ -7,6 +7,7 @@ const thingContainer : HTMLElement = document.getElementById('things') as HTMLEl
 let waitingOn : number = 0;
 
 [
+    'things/compounds.json',
     'things/cosmos.json',
     'things/earthlike.json',
     'things/life.json'
