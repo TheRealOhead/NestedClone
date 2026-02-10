@@ -1,4 +1,5 @@
 import { chooseFromArray, chooseIntegerInRange } from './misc';
+import { NameGenerator } from './nameGenerators.ts';
 
 /**
  * Give thing entries that inherit from other things their children
@@ -76,9 +77,9 @@ export class ThingInstance {
         }
 
         this.label.innerHTML = chooseFromArray(this.thingEntry.label || [thingID]); // Default to the ThingID if no label set
+        if (this.thingEntry.labelGenerator) this.label.innerHTML = NameGenerator[this.thingEntry.labelGenerator](); // Generate a label instead if a generator is specified
         this.label.classList.add('thing-label');
 
-        if (this.thingEntry.imagePath == null) this.thingEntry.imagePath = 'nothing.png';
         this.icon.src = this.thingEntry.imagePath ? `images/${this.thingEntry.imagePath}` : `images/${thingID}.png`;
         this.icon.addEventListener('error', () : void => {
             setTimeout(()=>{

@@ -85,7 +85,28 @@
     }
   },
 
+  "indescribable biology": {
+    "children": {
+      "oxygen": {},
+      "carbon": {},
+      "hydrogen": {}
+    },
+    "imagePath": "nothing.png"
+  },
+
+  "alien": {
+    "children": {
+      "indescribable biology": {}
+    },
+    "label": ["Gnorts, Mr. Alien", "E.T.", "Lrrr", "Horrible Gelatinous Blob", "Jar Jar Binks", "Little green man", "Zim", "Na'vi"]
+  },
+
   "ufo": {
+    "children": {
+      "alien": {
+        "range": [1, 3]
+      }
+    },
     "label": ["UFO"]
   },
 

@@ -8,6 +8,15 @@
     return array[chooseIntegerInRange([0, array.length - 1])];
   }
 
+  // src/nameGenerators.ts
+  var NameGenerator = class {
+    static continent() {
+      const prefixes = ["North Ame", "South Ame", "Afr", "As", "Ant", "Eur", "Oc"];
+      const suffixes = ["rica", "ica", "ope", "ia", "arctica", "ceana"];
+      return chooseFromArray(prefixes) + chooseFromArray(suffixes);
+    }
+  };
+
   // src/things.ts
   function applyInheritances() {
     Object.keys(ThingInstance.thingDirectory).forEach((key) => {
@@ -57,6 +66,7 @@
         this.description.innerHTML = `This thing was supposed to be "${originalThingID}", but Owen messed up!`;
       }
       this.label.innerHTML = chooseFromArray(this.thingEntry.label || [thingID]);
+      if (this.thingEntry.labelGenerator) this.label.innerHTML = NameGenerator[this.thingEntry.labelGenerator]();
       this.label.classList.add("thing-label");
       this.icon.src = this.thingEntry.imagePath ? `images/${this.thingEntry.imagePath}` : `images/${thingID}.png`;
       this.icon.addEventListener("error", () => {

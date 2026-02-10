@@ -45,7 +45,7 @@
   },
 
   "continent": {
-    "label": ["continent"],
+    "labelGenerator": "continent",
     "imagePath": "nothing.png"
   }
 }

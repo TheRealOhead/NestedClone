@@ -28,12 +28,12 @@
 
   "evil": {
     "label": ["1% evil"],
-    "imagePath": null
+    "imagePath": "nothing.png"
   },
 
   "hot gas": {
     "label": ["99% hot gas"],
-    "imagePath": null
+    "imagePath": "nothing.png"
   },
 
   "plankter": {
@@ -54,7 +54,7 @@
       "oxygen": {},
       "carbon": {}
     },
-    "imagePath": null
+    "imagePath": "nothing.png"
   },
 
   "dna": {
@@ -114,12 +114,12 @@
       "carbon": {},
       "hydrogen": {}
     },
-    "imagePath": null
+    "imagePath": "nothing.png"
   },
   "phospholipid tail": {
     "label": ["tail"],
     "inheritsFrom": ["phospholipid head"],
-    "imagePath": null
+    "imagePath": "nothing.png"
   },
 
 

@@ -2,7 +2,7 @@
   "$id": "thing-schema",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Things",
-  "description": "A listing of all the things in Nested Clone.",
+  "description": "A listing of things in Nested Clone.",
   "type": "object",
   "patternProperties": {
     "^.*$": {
@@ -23,7 +23,8 @@
                   "minLength": 2,
                   "maxLength": 2,
                   "items": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 0
                   }
                 },
                 "chance": {
@@ -43,9 +44,13 @@
             "type": "string"
           }
         },
+        "labelGenerator": {
+            "type": "string",
+            "description": "The name of a function in nameGenerators.ts from which to generate a name"
+        },
         "imagePath": {
           "type": "string",
-          "description": "A path to an icon to use, starting at docs/images. If unspecified, uses webroot/images/${id}.png"
+          "description": "A path to an icon to use, starting at docs/images. If unspecified, uses docs/images/${id}.png"
         },
         "inheritsFrom": {
           "type": "array",
