@@ -1,4 +1,6 @@
 {
+  "$schema": "../../thingSchema.json",
+  
   "earthlike surface": {
     "label": ["surface"],
     "imagePath": "nothing.png",
@@ -46,6 +48,10 @@
 
   "continent": {
     "labelGenerator": "continent",
-    "imagePath": "nothing.png"
+    "children": {
+      "country": {
+        "range": [6, 25]
+      }
+    }
   }
 }

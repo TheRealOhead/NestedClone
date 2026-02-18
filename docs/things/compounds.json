@@ -1,4 +1,6 @@
 {
+  "$schema": "../../thingSchema.json",
+  
   "calcium carbonate": {
     "children": {
       "calcium": {},
@@ -7,6 +9,7 @@
     },
     "imagePath": "molecule.png"
   },
+
 
   "water": {
     "children": {

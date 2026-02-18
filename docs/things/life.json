@@ -1,4 +1,6 @@
 {
+  "$schema": "../../thingSchema.json",
+  
   "_cell": {
     "children": {
       "cytoplasm": {},
@@ -253,7 +255,8 @@
 
   "tongue": {
     "children": {
-      "muscle": {}
+      "muscle": {},
+      "skin": {}
     }
   },
 
@@ -306,6 +309,35 @@
       "blood plasma": {}
     }
   },
+  
+  "keratin": {
+    "children": {
+      "protein": {
+        "range": [2, 5]
+      }
+    },
+    "imagePath": "molecule.png"
+  },
+
+  "skin cell": {
+    "inheritsFrom": ["eu cell"],
+    "imagePath": "eu cell.png"
+  },
+
+  "skin": {
+    "shuffleChildren": true,
+    "children": {
+      "keratin": {},
+      "skin cell": {
+        "range": [6, 12]
+      },
+      "bacteria": {
+        "chance": 0.5,
+        "range": [3, 6]
+      }
+    },
+    "imagePath": "nothing.png"
+  },
 
   "love": {},
 
@@ -317,6 +349,10 @@
       },
       "blood": {}
     }
+  },
+
+  "mucus": {
+    "inheritsFrom": ["saline"]
   },
 
   "blood vessel": {
@@ -336,7 +372,8 @@
       "heart": {},
       "muscle": {
         "range": [5, 10]
-      }
+      },
+      "skin": {}
     }
   },
 
@@ -388,6 +425,7 @@
   "_shelledInvertebrate": {
     "inheritsFrom": ["_invertebrate"],
     "children": {
+      "mucus": {},
       "shell": {
         "chance": 0.97
       }
@@ -436,5 +474,30 @@
     },
     "label": ["crab", "lobster", "shrimp"],
     "inheritsFrom": ["_invertebrate"]
+  },
+
+  "hair": {
+    "children": {
+      "keratin": {}
+    }
+  },
+
+  "_mammal": {
+    "inheritsFrom": ["_vertebrate"],
+    "children": {
+      "hair": {}
+    }
+  },
+
+  "_outerOrgan": {
+    "children": {
+      "muscle": {
+        "range": [3, 5]
+      },
+      "bone": {
+        "range": [3, 5]
+      },
+      "skin": {}
+    }
   }
 }

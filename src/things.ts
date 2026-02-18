@@ -1,5 +1,5 @@
 import { chooseFromArray, chooseIntegerInRange } from './misc';
-import { NameGenerator } from './nameGenerators.ts';
+import { nameGenerator } from './nameGenerators';
 
 /**
  * Give thing entries that inherit from other things their children
@@ -47,13 +47,18 @@ export class ThingInstance {
     expanded : boolean = false;
     hasGeneratedChildren : boolean = false;
 
+    parent : ThingInstance | null = null;
+    thingID : ThingID = 'thing';
+
     public static clickableToManager : Map<HTMLElement, ThingInstance> = new Map<HTMLElement, ThingInstance>();
 
-    constructor(thingID : ThingID) {
+    constructor(thingID : ThingID, parent : ThingInstance | null) {
+        this.thingID = thingID;
         const originalThingID : ThingID = thingID;
+        this.parent = parent;
 
         if (typeof ThingInstance.thingDirectory[thingID] === 'undefined') {
-            console.warn(`No item found called ${thingID}, defaulting to the thing`);
+            console.warn(`No item found called ${thingID}, defaulting to thing`);
             thingID = 'thing';
         }
         this.thingEntry = ThingInstance.thingDirectory[thingID];
@@ -77,7 +82,7 @@ export class ThingInstance {
         }
 
         this.label.innerHTML = chooseFromArray(this.thingEntry.label || [thingID]); // Default to the ThingID if no label set
-        if (this.thingEntry.labelGenerator) this.label.innerHTML = NameGenerator[this.thingEntry.labelGenerator](); // Generate a label instead if a generator is specified
+        if (this.thingEntry.labelGenerator) this.label.innerHTML = nameGenerator[this.thingEntry.labelGenerator](); // Generate a label instead if a generator is specified
         this.label.classList.add('thing-label');
 
         this.icon.src = this.thingEntry.imagePath ? `images/${this.thingEntry.imagePath}` : `images/${thingID}.png`;
@@ -135,17 +140,55 @@ export class ThingInstance {
 
     }
 
+    /**
+     * Determines whether a child can be generated based on its parentBeforeUniverse predicate
+     * @param childEntry 
+     * @param parent 
+     * @returns Whether the child should be generated
+     */
+    private static checkParentBeforeUniversePredicate(childEntry : ChildEntry, parent : ThingInstance) {
+        if (childEntry.predicates && childEntry.predicates.parentsBeforeUniverse) {
+            for (let superParent of childEntry.predicates.parentsBeforeUniverse) {
+                let invert : boolean = false;
+                if (superParent.charAt(0) == '!') {
+                    superParent = superParent.substring(1);
+                    invert = true;
+                }
 
+                // Climb tree
+                let current : ThingInstance | null = parent;
+                while (current != null && current.thingID != 'universe' && current.thingID != superParent)
+                    current = current.parent;
+
+                // Got to universe first
+                if (current == null || current.thingID == 'universe')
+                    return invert;
+
+                // Got to superParent first
+                return !invert;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Generates a single child of a {@link ThingInstance}
+     * @param parent Parent {@link ThingInstance}
+     * @param childID {@link ThingID} of the child
+     */
     static generateChild(parent : ThingInstance, childID : ThingID) : void {
         const childEntry : ChildEntry = parent.thingEntry.children[childID] as ChildEntry;
 
-        if (Math.random() < (childEntry.chance || 1)) {
+        if (!ThingInstance.checkParentBeforeUniversePredicate(childEntry, parent))
+            return;
 
-            const amount : number = chooseIntegerInRange(childEntry.range || [1, 1]);
+        if (!childEntry.chance || Math.random() < childEntry.chance) {
+
+            const amount : number = chooseIntegerInRange(childEntry.range || [childEntry.amount || 1, childEntry.amount || 1])
 
             for (let i : number = 0; i < amount; i++) {
 
-                parent.children.appendChild(new ThingInstance(childID).mainContainer);
+                parent.children.appendChild(new ThingInstance(childID, parent).mainContainer);
 
             }
         }
@@ -161,7 +204,11 @@ export type ThingID = string;
  */
 export type ChildEntry = {
     chance?: number,
-    range?: number[]
+    range?: number[],
+    amount?: number,
+    predicates?: {
+        parentsBeforeUniverse?: string[]
+    }
 }
 export interface ChildDirectory {
     [key : ThingID]: ChildEntry
@@ -170,8 +217,10 @@ export interface ChildDirectory {
  * A type of thing
  */
 export type ThingEntry = {
+    parent: ThingEntry | null,
     label?: string[],
     children: ChildDirectory,
+    labelGenerator?: string,
     inheritsFrom?: ThingID[],
     /**
      * An image path starting in the images directory

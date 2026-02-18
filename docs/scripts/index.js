@@ -9,11 +9,164 @@
   }
 
   // src/nameGenerators.ts
-  var NameGenerator = class {
-    static continent() {
+  function applyIndefiniteArticle(str) {
+    if ("aeiou".includes(str.charAt(0))) {
+      return "an " + str;
+    }
+    return "a " + str;
+  }
+  var cardinalDirections = ["North", "South", "East", "West"];
+  var foods = {
+    countable: [
+      "apple",
+      "orange",
+      "sandwich",
+      "hamburger",
+      "salad",
+      "hotdog",
+      "banana"
+    ],
+    uncountable: [
+      "chips",
+      "caviar",
+      "cereal",
+      "spaghetti",
+      "meatloaf",
+      "soup",
+      "ice cream",
+      "yogurt",
+      "pizza"
+    ]
+  };
+  var nameGenerator = {
+    continent: () => {
       const prefixes = ["North Ame", "South Ame", "Afr", "As", "Ant", "Eur", "Oc"];
       const suffixes = ["rica", "ica", "ope", "ia", "arctica", "ceana"];
       return chooseFromArray(prefixes) + chooseFromArray(suffixes);
+    },
+    country: () => {
+      const preprefixes = ["United States of ", "Republic of ", "", "", "", "", "", ""];
+      const prefixes = ["Pak", "Nic", "Mex", "Canad", "Irel", "Chin", "Plob", "Ins", "Flub", "Glorb", "Schmub", "Plumb"];
+      const suffixes = ["aria", "orus", "istan", "eria", "ico", "ula", "ebria"];
+      let name = chooseFromArray(preprefixes) + chooseFromArray(prefixes) + chooseFromArray(suffixes);
+      if (Math.random() < 0.1) {
+        return chooseFromArray(cardinalDirections) + " " + name;
+      }
+      return name;
+    },
+    thought: () => {
+      return chooseFromArray([
+        "I need to pick up more milk today",
+        "I miss my childhood dog",
+        "I wonder if they'd notice if I left",
+        "I'm having a great day today",
+        "How come T-Rexes had such short arms?",
+        "What was that one band called?",
+        "My back itches",
+        "I think I forgot how to do long division",
+        "They don't make 'em like they used to",
+        "I don't have a care in the world",
+        "Why'd they stop making that cereal?",
+        "I could go for " + applyIndefiniteArticle(chooseFromArray(foods.countable)),
+        "I could go for some " + chooseFromArray(foods.uncountable),
+        "What if my entire life is just a simulation? Perhaps this very thought was typed up by some college student who's supposed to be doing his homework and is working on a personal project instead? If that's so, is someone reading my thoughts? Are my thoughts randomly generated? Nah, that's too far-fetched",
+        "I think I need a new computer",
+        "My phone is low on battery",
+        "JavaScript sucks",
+        "Man, I love TypeScript",
+        "That was a rude thing to say",
+        "That was a funny video",
+        "My mom makes the best meatloaf"
+      ]);
+    },
+    person: () => {
+      const firstNames = [
+        "Alice",
+        "Alex",
+        "Andrew",
+        "Betty",
+        "Bart",
+        "Cindy",
+        "Charlie",
+        "Calvin",
+        "Dottie",
+        "David",
+        "Ellen",
+        "Evan",
+        "Evin",
+        "Francene",
+        "Frank",
+        "Gertrude",
+        "Gil",
+        "Gaylord",
+        "Helen",
+        "Harold",
+        "Ivan",
+        "Jay",
+        "Jennifer",
+        "Jack",
+        "Joshua",
+        "Kisari",
+        "Katelin",
+        "Lillian",
+        "Leo",
+        "Lars",
+        "May",
+        "Michael",
+        "Nikolai",
+        "Nick",
+        "Nadine",
+        "Owen",
+        "Olivia",
+        "Parker",
+        "Patrick",
+        "Quinn",
+        "Red",
+        "Ryan",
+        "Steven",
+        "Sarah",
+        "Tyler",
+        "Tina",
+        "Valorie",
+        "William",
+        "Xavier",
+        "Yancy",
+        "Zack"
+      ];
+      const lastNames = [
+        "Andrews",
+        "Adams",
+        "Addams",
+        "Clemonts",
+        "Davidson",
+        "Evans",
+        "Fitzgerald",
+        "Gilraine",
+        "Howards",
+        "Johnson",
+        "Jackson",
+        "Larson",
+        "Michaels",
+        "Myers",
+        "Owens",
+        "Parker",
+        "Reagan",
+        "Stevens",
+        "Saturn",
+        "Smith",
+        "Smith",
+        "Smith",
+        "Williams",
+        "White",
+        "Black",
+        "Brown"
+      ];
+      const prefixes = ["Prof. ", "Dr. ", "Rev. ", "", "", "", "", "", "", ""];
+      const suffixes = [" Jr.", " Sr.", " III", "", "", "", "", "", "", "", "", "", "", "", ""];
+      if (Math.random() < 1 / 2e3) {
+        return chooseFromArray(["Gabe Newell", "Elvis Presley"]);
+      }
+      return chooseFromArray(prefixes) + chooseFromArray(firstNames) + " " + chooseFromArray(lastNames) + chooseFromArray(suffixes);
     }
   };
 
@@ -36,7 +189,7 @@
     });
   }
   var ThingInstance = class _ThingInstance {
-    constructor(thingID) {
+    constructor(thingID, parent) {
       this.mainContainer = document.createElement("div");
       this.clickable = document.createElement("div");
       this.icon = document.createElement("img");
@@ -45,9 +198,13 @@
       this.description = document.createElement("span");
       this.expanded = false;
       this.hasGeneratedChildren = false;
+      this.parent = null;
+      this.thingID = "thing";
+      this.thingID = thingID;
       const originalThingID = thingID;
+      this.parent = parent;
       if (typeof _ThingInstance.thingDirectory[thingID] === "undefined") {
-        console.warn(`No item found called ${thingID}, defaulting to the thing`);
+        console.warn(`No item found called ${thingID}, defaulting to thing`);
         thingID = "thing";
       }
       this.thingEntry = _ThingInstance.thingDirectory[thingID];
@@ -66,7 +223,7 @@
         this.description.innerHTML = `This thing was supposed to be "${originalThingID}", but Owen messed up!`;
       }
       this.label.innerHTML = chooseFromArray(this.thingEntry.label || [thingID]);
-      if (this.thingEntry.labelGenerator) this.label.innerHTML = NameGenerator[this.thingEntry.labelGenerator]();
+      if (this.thingEntry.labelGenerator) this.label.innerHTML = nameGenerator[this.thingEntry.labelGenerator]();
       this.label.classList.add("thing-label");
       this.icon.src = this.thingEntry.imagePath ? `images/${this.thingEntry.imagePath}` : `images/${thingID}.png`;
       this.icon.addEventListener("error", () => {
@@ -115,12 +272,43 @@
         });
       }
     }
+    /**
+     * Determines whether a child can be generated based on its parentBeforeUniverse predicate
+     * @param childEntry 
+     * @param parent 
+     * @returns Whether the child should be generated
+     */
+    static checkParentBeforeUniversePredicate(childEntry, parent) {
+      if (childEntry.predicates && childEntry.predicates.parentsBeforeUniverse) {
+        for (let superParent of childEntry.predicates.parentsBeforeUniverse) {
+          let invert = false;
+          if (superParent.charAt(0) == "!") {
+            superParent = superParent.substring(1);
+            invert = true;
+          }
+          let current = parent;
+          while (current != null && current.thingID != "universe" && current.thingID != superParent)
+            current = current.parent;
+          if (current == null || current.thingID == "universe")
+            return invert;
+          return !invert;
+        }
+      }
+      return true;
+    }
+    /**
+     * Generates a single child of a {@link ThingInstance}
+     * @param parent Parent {@link ThingInstance}
+     * @param childID {@link ThingID} of the child
+     */
     static generateChild(parent, childID) {
       const childEntry = parent.thingEntry.children[childID];
-      if (Math.random() < (childEntry.chance || 1)) {
-        const amount = chooseIntegerInRange(childEntry.range || [1, 1]);
+      if (!_ThingInstance.checkParentBeforeUniversePredicate(childEntry, parent))
+        return;
+      if (!childEntry.chance || Math.random() < childEntry.chance) {
+        const amount = chooseIntegerInRange(childEntry.range || [childEntry.amount || 1, childEntry.amount || 1]);
         for (let i = 0; i < amount; i++) {
-          parent.children.appendChild(new _ThingInstance(childID).mainContainer);
+          parent.children.appendChild(new _ThingInstance(childID, parent).mainContainer);
         }
       }
     }
@@ -277,7 +465,10 @@
     "things/compounds.json",
     "things/cosmos.json",
     "things/earthlike.json",
-    "things/life.json"
+    "things/life.json",
+    "things/civilization.json",
+    "things/household.json",
+    "things/people.json"
   ].forEach((fileName) => {
     waitingOn++;
     const filePromise = fetch(fileName);
@@ -286,12 +477,15 @@
       waitingOn--;
     });
   });
+  function getStartingThingID() {
+    return new URLSearchParams(window.location.search).get("start") || "universe";
+  }
   var waitForLoad = setInterval(() => {
     if (waitingOn == 0) {
       createAtoms(ThingInstance.thingDirectory);
       applyInheritances();
       console.log(ThingInstance.thingDirectory);
-      const startThing = new URLSearchParams(window.location.search).get("start") || "universe";
+      const startThing = getStartingThingID();
       thingContainer.appendChild(new ThingInstance(startThing).mainContainer);
       clearInterval(waitForLoad);
     }

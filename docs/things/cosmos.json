@@ -1,4 +1,6 @@
 {
+  "$schema": "../../thingSchema.json",
+
   "thing": {
     "description": "It doesn't get any more generic than this!"
   },

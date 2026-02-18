@@ -1,0 +1,61 @@
+{
+    "$schema": "../../thingSchema.json",
+    
+    "_inhabitable": {
+        "children": {
+            "person": {
+                "chance": 0.2,
+                "range": [1, 3]
+            }
+        }
+    },
+
+    "living room": {
+        "children": {
+            "couch": {},
+            "chair": {
+                "range": [1, 3]
+            },
+            "TV": {
+                "chance": 0.8
+            },
+            "rug": {
+                "chance": 0.8
+            },
+            "painting": {
+                "chance": 0.1
+            }
+        },
+        "inheritsFrom": ["_inhabitable"]
+    },
+
+    "bedroom": {
+        "children": {
+            "bed": {},
+            "TV": {
+                "chance": 0.2
+            },
+            "computer": {
+                "chance": 0.1
+            },
+            "nightstand": [1, 2],
+            "painting": {
+                "chance": 0.1
+            }
+        },
+        "inheritsFrom": ["_inhabitable"]
+    },
+
+    "bathroom": {
+        "children": {
+            "sink": {},
+            "toilet": {},
+            "bathtub": {},
+            "showerhead": {},
+            "mirror": {},
+            "person": {
+                "chance": 0.05
+            }
+        }
+    }
+}

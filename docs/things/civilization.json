@@ -1,0 +1,75 @@
+{
+  "$schema": "../../thingSchema.json",
+  
+	"country": {
+    "labelGenerator": "country",
+    "children": {
+      "state": {
+        "range": [3, 25]
+      }
+    }
+  },
+
+  "state": {
+    "label": ["state", "province", "territory", "region"],
+    "children": {
+      "town": {
+        "range": [10, 20]
+      },
+      "city": {
+        "range": [0, 3]
+      }
+    }
+  },
+
+  "_municipality": {
+    "children": {
+      "house": {
+        "range": [10, 20]
+      },
+      "school": {
+        "range": [2, 4]
+      }
+    }
+  },
+
+  "town": {
+    "inheritsFrom": ["_municipality"]
+  },
+
+  "city": {
+    "children": {
+      "sky scraper": {
+        "range": [10, 20]
+      },
+      "office building": {
+        "range": [4, 12]
+      },
+      "school": {
+        "range": [5, 10]
+      },
+      "hospital": {
+        "range": [1, 2]
+      }
+      
+    },
+    "inheritsFrom": ["_municipality"]
+  },
+
+  "house": {
+    "children": {
+      "kitchen": {},
+      "living room": {},
+      "bedroom": {
+        "range": [1, 3]
+      },
+      "bathroom": {
+        "range": [1, 2]
+      },
+      "basement": {},
+
+      "roof": {},
+      "walls": {}
+    }
+  }
+}

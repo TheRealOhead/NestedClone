@@ -1,0 +1,146 @@
+{
+    "$schema": "../../thingSchema.json",
+
+    "person": {
+        "labelGenerator": "person",
+        "children": {
+            "head": {},
+            "arm": {
+                "amount": 2
+            },
+            "leg": {
+                "amount": 2
+            }
+        }
+    },
+
+    "head": {
+        "children": {
+            "brain": {},
+            "eye": {
+                "amount": 2
+            },
+            "mouth": {},
+            "nose": {},
+            "hair": {}
+        },
+        "inheritsFrom": ["_outerOrgan"]
+    },
+
+    "snot": {
+        "inheritsFrom": ["mucus"]
+    },
+
+    "nose": {
+        "children": {
+            "snot": {}
+        },
+        "inheritsFrom": ["_outerOrgan"]
+    },
+
+    "brain": {
+        "children": {
+            "thoughts": {}
+        }
+    },
+
+    "thoughts": {
+        "children": {
+            "thought": {
+                "predicates": {
+                    "parentsBeforeUniverse": ["!ohead"]
+                },
+                "range": [2, 5]
+            },
+            "o thought": {
+                "predicates": {
+                    "parentsBeforeUniverse": ["ohead"]
+                },
+                "range": [1, 3]
+            }
+        }
+    },
+
+    "thought": {
+        "labelGenerator": "thought"
+    },
+
+
+    "arm": {
+        "inheritsFrom": ["_outerOrgan"],
+        "children": {
+        "hand": {}
+        }
+    },
+
+    "leg": {
+        "inheritsFrom": ["_outerOrgan"],
+        "children": {
+        "foot": {}
+        }
+    },
+
+    "hand": {
+        "children": {
+        "finger": {
+            "amount": 5
+        }
+        },
+        "inheritsFrom": ["_outerOrgan"]
+    },
+
+    "foot": {
+        "children": {
+        "toe": {
+            "amount": 5
+        }
+        },
+        "inheritsFrom": ["_outerOrgan"]
+    },
+
+    "finger": {
+        "children": {
+        "fingernail": {}
+        },
+        "inheritsFrom": ["_outerOrgan"]
+    },
+
+    "toe": {
+        "children": {
+        "toenail": {}
+        },
+        "inheritsFrom": ["_outerOrgan"]
+    },
+
+    "_biologicalNail": {
+        "children": {
+        "keratin": {}
+        }
+    },
+
+    "toenail": {
+        "inheritsFrom": ["_biologicalNail"],
+        "imagePath": "bio nail.png"
+    },
+
+    "fingernail": {
+        "inheritsFrom": ["_biologicalNail"],
+        "imagePath": "bio nail.png"
+    },
+
+
+    "ohead": {
+        "inheritsFrom": ["person"],
+        "label": ["Owen Parker"]
+    },
+
+    "o thought": {
+        "label": [
+            "How'd you find me here?!",
+            "It's me, in the flesh",
+            "What am I doing here of all places?",
+            "How vain of me"
+        ]
+    }
+
+}

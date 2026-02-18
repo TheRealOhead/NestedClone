@@ -4,6 +4,12 @@
   "title": "Things",
   "description": "A listing of things in Nested Clone.",
   "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The specification of this schema"
+    }
+  },
   "patternProperties": {
     "^.*$": {
       "type": "object",
@@ -17,6 +23,25 @@
           "patternProperties": {
             "^.*$": {
               "properties": {
+                "predicates": {
+                  "type": "object",
+                  "description": "A set of circumstances that must be met in order to generate this child.",
+                  "properties": {
+                    "parentsBeforeUniverse": {
+                      "type": "array",
+                      "minLength": 1,
+                      "description": "Required parents",
+                      "items": {
+                        "type": "string",
+                        "description": "A parent that must occur before \"universe\". A \"!\" specifies that this must NOT be a parent before \"universe\""
+                      }
+                    }
+                  }
+                },
+                "amount": {
+                  "type": "integer",
+                  "description": "A specific number of these things. Overwritten by \"range\" property if present."
+                },
                 "range": {
                   "type": "array",
                   "description": "A range describing how many of this child should be generated. Inclusive.",

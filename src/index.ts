@@ -10,7 +10,10 @@ let waitingOn : number = 0;
     'things/compounds.json',
     'things/cosmos.json',
     'things/earthlike.json',
-    'things/life.json'
+    'things/life.json',
+    'things/civilization.json',
+    'things/household.json',
+    'things/people.json'
 ].forEach((fileName : string) : void => {
         waitingOn++;
         const filePromise : Promise<any> = fetch(fileName);
@@ -22,6 +25,10 @@ let waitingOn : number = 0;
             });
 });
 
+function getStartingThingID() : string {
+    return new URLSearchParams(window.location.search).get('start') || 'universe';
+}
+
 const waitForLoad = setInterval(() : void => {
         if (waitingOn == 0) {
 
@@ -31,7 +38,7 @@ const waitForLoad = setInterval(() : void => {
 
             console.log(Things.ThingInstance.thingDirectory);
 
-            const startThing : ThingID = new URLSearchParams(window.location.search).get('start') || 'universe';
+            const startThing : ThingID = getStartingThingID();
 
             thingContainer.appendChild(new Things.ThingInstance(startThing).mainContainer);
 
