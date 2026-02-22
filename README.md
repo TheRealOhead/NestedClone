@@ -14,3 +14,9 @@ I procedurally generate some place names and the like. It is possible that I've 
 You might need to install `esbuild` with `npm install esbuild`.
 
 After that, building is as simple as `npm run build`.
+
+# Things
+
+If you're interested in contributing ideas for Things to add, that's wonderful! I take verbal requests, but if you're tech-savvy, I implore you to make a pull request.
+
+The `.json` files found in `docs/things` directory are used to define Things, and each of them are listed in `src/index.ts` to be loaded.
